@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm")
 }
 
-group = "com.github.langara.tuplek"
+group = "com.github.langara.abcdk"
 version = "0.0.1"
 
 dependencies {
