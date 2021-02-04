@@ -4,12 +4,17 @@ plugins {
 }
 
 group = "com.github.langara.abcdk"
-version = "0.0.2"
+version = "0.0.3"
 
 dependencies {
     implementation(Deps.kotlinStdlib8)
-    testImplementation(Deps.junit)
+    testImplementation(Deps.junit5)
+    testImplementation(Deps.junit5engine)
     testImplementation(Deps.uspek)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 // Create sources Jar from main kotlin sources

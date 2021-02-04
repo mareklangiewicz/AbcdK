@@ -1,20 +1,18 @@
 package pl.mareklangiewicz.abcdk
 
-import org.junit.Test
-import org.junit.runner.RunWith
-import pl.mareklangiewicz.uspek.USpekRunner
+import org.junit.jupiter.api.TestFactory
 import pl.mareklangiewicz.uspek.o
-import pl.mareklangiewicz.uspek.uspek
+import pl.mareklangiewicz.uspek.uspekTestFactory
 
 
 /**
  * Note: Use IDE type hints to see how covariant union types are inferred by compiler.
  * Note: This is more like a playground than tests - most tests can never fail and are here to see IDE type hints.
  */
-@RunWith(USpekRunner::class)
 class AbcdkTest {
 
-    @Test fun abcdkTest() = uspek {
+    @TestFactory
+    fun abcdkTest() = uspekTestFactory {
 
         "On AB objects" o {
             val a = AB.A("a")
