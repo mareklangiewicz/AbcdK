@@ -1,5 +1,3 @@
-import pl.mareklangiewicz.deps.Repos
-
 plugins {
     id("pl.mareklangiewicz.deps")
 }

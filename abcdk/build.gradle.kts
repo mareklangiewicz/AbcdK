@@ -1,5 +1,3 @@
-import pl.mareklangiewicz.deps.Deps
-
 plugins {
     `maven-publish`
     kotlin("jvm") version "1.4.32"
