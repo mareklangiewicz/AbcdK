@@ -1,6 +1,9 @@
+import pl.mareklangiewicz.deps.Deps
+
 plugins {
     `maven-publish`
-    kotlin("jvm")
+    kotlin("jvm") version "1.4.32"
+    id("pl.mareklangiewicz.deps")
 }
 
 group = "com.github.langara.abcdk"
