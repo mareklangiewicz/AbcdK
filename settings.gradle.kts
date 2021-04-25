@@ -1,3 +1,11 @@
-include(":abcdk")
+@file:Suppress("UnstableApiUsage")
 
-includeBuild("../deps.kt")
+pluginManagement {
+    includeBuild("../deps.kt")
+}
+
+plugins {
+    id("pl.mareklangiewicz.deps.settings")
+}
+
+include(":abcdk")

@@ -1,41 +1,43 @@
 plugins {
+    kotlin("multiplatform") version Vers.kotlin
     `maven-publish`
-    kotlin("jvm") version "1.4.32"
-    id("pl.mareklangiewicz.deps")
 }
 
-group = "com.github.langara.abcdk"
-version = "0.0.3"
+group = "pl.mareklangiewicz.abcdk"
+version = "0.0.04"
 
-dependencies {
-    implementation(Deps.kotlinStdlib8)
-    testImplementation(Deps.junit5)
-    testImplementation(Deps.junit5engine)
-    testImplementation(Deps.uspek)
+repositories {
+    mavenCentral()
+    maven(Repos.jitpack)
 }
 
-tasks.test {
+kotlin {
+    jvm()
+//    js {
+//        browser()
+//    }
+//    linuxX64()
+
+    sourceSets {
+        val commonMain by getting
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+            }
+        }
+        val jvmMain by getting
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation(Deps.junit5engine)
+                implementation(Deps.uspek)
+
+            }
+        }
+    }
+}
+
+tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-// Create sources Jar from main kotlin sources
-val sourcesJar by tasks.creating(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    description = "Assembles sources JAR"
-    classifier = "sources"
-    from(sourceSets.getByName("main").allSource)
-}
-
-publishing {
-    publications {
-        create("default", MavenPublication::class.java) {
-            from(components.getByName("java"))
-            artifact(sourcesJar)
-        }
-    }
-    repositories {
-        maven {
-            url = uri("$buildDir/repository")
-        }
-    }
 }

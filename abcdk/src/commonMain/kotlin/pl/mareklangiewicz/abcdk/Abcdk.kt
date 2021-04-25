@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package pl.mareklangiewicz.abcdk
 
 data class A<out TA>(val value: TA)
