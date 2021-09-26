@@ -5,6 +5,7 @@
 .DS_Store
 /build
 /captures
+my.gradle.log
 uspek/out
 abcdk/out
 .externalNativeBuild
