@@ -2,6 +2,7 @@
 @file:OptIn(okio.ExperimentalFileSystem::class)
 
 import okio.Path.Companion.toOkioPath
+import pl.mareklangiewicz.deps.logSomeEventsToFile
 
 gradle.logSomeEventsToFile(rootProject.projectDir.toOkioPath() / "my.gradle.log")
 
