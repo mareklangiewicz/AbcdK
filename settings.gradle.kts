@@ -1,5 +1,4 @@
 @file:Suppress("UnstableApiUsage")
-@file:OptIn(okio.ExperimentalFileSystem::class)
 
 import okio.Path.Companion.toOkioPath
 import pl.mareklangiewicz.deps.logSomeEventsToFile
