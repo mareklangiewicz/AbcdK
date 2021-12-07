@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version Vers.kotlin
-    `maven-publish`
+    id("maven-publish")
 }
 
 group = "pl.mareklangiewicz.abcdk"
