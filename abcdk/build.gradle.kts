@@ -3,36 +3,35 @@ plugins {
     id("maven-publish")
 }
 
-group = "pl.mareklangiewicz.abcdk"
-version = "0.0.04"
+defaultGroupAndVer(Deps.abcdk)
 
 repositories {
-    mavenCentral()
-    maven(Repos.jitpack)
+    defaultRepos(withMavenLocal = true)
 }
 
 kotlin {
     jvm()
-//    js {
-//        browser()
-//    }
+    js(IR) {
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
+    }
 //    linuxX64()
 
     sourceSets {
-        val commonMain by getting
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin("test"))
+                implementation(Deps.uspekx)
             }
         }
-        val jvmMain by getting
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
                 implementation(Deps.junit5engine)
-                implementation(Deps.uspek)
-
             }
         }
     }
