@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version Vers.kotlin
+    kotlin("multiplatform")
     id("maven-publish")
 }
 
@@ -11,16 +11,8 @@ repositories {
 
 kotlin {
     jvm()
-    js(IR) {
-        browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                }
-            }
-        }
-    }
-//    linuxX64()
+    jsDefault()
+    linuxX64()
 
     sourceSets {
         val commonTest by getting {
