@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import okio.Path.Companion.toOkioPath
-import pl.mareklangiewicz.deps.logSomeEventsToFile
+import pl.mareklangiewicz.evts.*
 
 gradle.logSomeEventsToFile(rootProject.projectDir.toOkioPath() / "my.gradle.log")
 
@@ -13,5 +13,7 @@ pluginManagement {
 plugins {
     id("pl.mareklangiewicz.deps.settings")
 }
+
+rootProject.name = "AbcdK"
 
 include(":abcdk")
