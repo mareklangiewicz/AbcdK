@@ -14,11 +14,6 @@ defaultBuildTemplateForMppLib(
     withNativeLinux64 = true,
 )
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
-
 // region [Kotlin Module Build Template]
 
 fun TaskCollection<Task>.defaultKotlinCompileOptions(
@@ -59,7 +54,7 @@ fun Project.defaultBuildTemplateForMppLib(
         addCommonMainDependencies
     ) }
     tasks.defaultKotlinCompileOptions()
-    tasks.defaultTestsOptions()
+    tasks.defaultTestsOptions(onJvmUseJUnitPlatform = withTestJUnit5)
     if (plugins.hasPlugin("maven-publish")) {
         defaultPublishing(details)
         if (plugins.hasPlugin("signing")) defaultSigning()
