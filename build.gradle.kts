@@ -4,7 +4,6 @@ import pl.mareklangiewicz.utils.*
 
 plugins {
     id("io.github.gradle-nexus.publish-plugin") version vers.nexusPublishGradlePlugin
-    kotlin("multiplatform") version vers.kotlin apply false
 }
 
 defaultGroupAndVerAndDescription(libs.AbcdK)
@@ -14,22 +13,9 @@ defaultSonatypeOssStuffFromSystemEnvs()
 private val rootBuild = rootProjectPath / "build.gradle.kts"
 private val abcdkModuleBuild = rootProjectPath / "abcdk" / "build.gradle.kts"
 
-tasks.registerAllThatGroupFun("inject",
-    ::checkTemplates,
-    ::injectTemplates,
-)
-
-fun checkTemplates() {
-    checkRootBuildTemplate(rootBuild)
-    checkKotlinModuleBuildTemplates(abcdkModuleBuild)
-    checkMppModuleBuildTemplates(abcdkModuleBuild)
-}
-
-fun injectTemplates() {
-    injectRootBuildTemplate(rootBuild)
-    injectKotlinModuleBuildTemplate(abcdkModuleBuild)
-    injectMppModuleBuildTemplate(abcdkModuleBuild)
-}
+tasks.registerAllThatGroupFun("inject", ::checkTemplates, ::injectTemplates)
+fun checkTemplates() = checkAllKnownRegionsInProject()
+fun injectTemplates() = injectAllKnownRegionsInProject()
 
 // region [Root Build Template]
 
