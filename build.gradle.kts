@@ -23,7 +23,7 @@ fun injectTemplates() = injectAllKnownRegionsInProject()
  * System.getenv() should contain six env variables with given prefix, like:
  * * MYKOTLIBS_signing_keyId
  * * MYKOTLIBS_signing_password
- * * MYKOTLIBS_signing_key
+ * * MYKOTLIBS_signing_keyFile
  * * MYKOTLIBS_ossrhUsername
  * * MYKOTLIBS_ossrhPassword
  * * MYKOTLIBS_sonatypeStagingProfileId
@@ -41,7 +41,7 @@ fun Project.defaultSonatypeOssNexusPublishing(
     ossrhPassword: String = rootExt("ossrhPassword"),
 ) = nexusPublishing {
     repositories {
-        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
+        sonatype {  // only for users registered in Sonatype after 24 Feb 2021
             stagingProfileId put sonatypeStagingProfileId
             username put ossrhUsername
             password put ossrhPassword
