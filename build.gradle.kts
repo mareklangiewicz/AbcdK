@@ -10,9 +10,6 @@ defaultGroupAndVerAndDescription(libs.AbcdK)
 
 defaultSonatypeOssStuffFromSystemEnvs()
 
-private val rootBuild = rootProjectPath / "build.gradle.kts"
-private val abcdkModuleBuild = rootProjectPath / "abcdk" / "build.gradle.kts"
-
 tasks.registerAllThatGroupFun("inject", ::checkTemplates, ::injectTemplates)
 fun checkTemplates() = checkAllKnownRegionsInProject()
 fun injectTemplates() = injectAllKnownRegionsInProject()
