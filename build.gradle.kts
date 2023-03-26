@@ -4,15 +4,20 @@ import pl.mareklangiewicz.utils.*
 
 plugins {
     id("io.github.gradle-nexus.publish-plugin") version vers.nexusPublishGradlePlugin
+    kotlin("multiplatform") version vers.kotlin apply false
 }
+
+// kinda workaround for kinda issue with kotlin native
+// https://youtrack.jetbrains.com/issue/KT-48410/Sync-failed.-Could-not-determine-the-dependencies-of-task-commonizeNativeDistribution.#focus=Comments-27-5144160.0-0
+repositories { mavenCentral() }
 
 defaultGroupAndVerAndDescription(libs.AbcdK)
 
 defaultSonatypeOssStuffFromSystemEnvs()
 
 tasks.registerAllThatGroupFun("inject", ::checkTemplates, ::injectTemplates)
-fun checkTemplates() = checkAllKnownRegionsInProject()
-fun injectTemplates() = injectAllKnownRegionsInProject()
+fun checkTemplates() = checkAllKnownRegionsInProject(projectPath)
+fun injectTemplates() = injectAllKnownRegionsInProject(projectPath)
 
 // region [Root Build Template]
 
@@ -33,17 +38,19 @@ fun Project.defaultSonatypeOssStuffFromSystemEnvs(envKeyMatchPrefix: String = "M
 }
 
 fun Project.defaultSonatypeOssNexusPublishing(
-    sonatypeStagingProfileId: String = rootExt("sonatypeStagingProfileId"),
-    ossrhUsername: String = rootExt("ossrhUsername"),
-    ossrhPassword: String = rootExt("ossrhPassword"),
-) = nexusPublishing {
-    repositories {
-        sonatype {  // only for users registered in Sonatype after 24 Feb 2021
-            stagingProfileId put sonatypeStagingProfileId
-            username put ossrhUsername
-            password put ossrhPassword
-            nexusUrl put uri(repos.sonatypeOssNexus)
-            snapshotRepositoryUrl put uri(repos.sonatypeOssSnapshots)
+    sonatypeStagingProfileId: String = rootExtString["sonatypeStagingProfileId"],
+    ossrhUsername: String = rootExtString["ossrhUsername"],
+    ossrhPassword: String = rootExtString["ossrhPassword"],
+) {
+    nexusPublishing {
+        this.repositories {
+            sonatype {  // only for users registered in Sonatype after 24 Feb 2021
+                stagingProfileId put sonatypeStagingProfileId
+                username put ossrhUsername
+                password put ossrhPassword
+                nexusUrl put uri(repos.sonatypeOssNexus)
+                snapshotRepositoryUrl put uri(repos.sonatypeOssSnapshots)
+            }
         }
     }
 }
