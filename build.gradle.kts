@@ -1,4 +1,5 @@
 import pl.mareklangiewicz.defaults.*
+import pl.mareklangiewicz.deps.LibDetails
 import pl.mareklangiewicz.ure.*
 import pl.mareklangiewicz.utils.*
 
@@ -7,19 +8,26 @@ plugins {
     kotlin("multiplatform") version vers.kotlin apply false
 }
 
-// kinda workaround for kinda issue with kotlin native
-// https://youtrack.jetbrains.com/issue/KT-48410/Sync-failed.-Could-not-determine-the-dependencies-of-task-commonizeNativeDistribution.#focus=Comments-27-5144160.0-0
-repositories { mavenCentral() }
-
-defaultGroupAndVerAndDescription(libs.AbcdK)
-
-defaultSonatypeOssStuffFromSystemEnvs()
-
-tasks.registerAllThatGroupFun("inject", ::checkTemplates, ::injectTemplates)
-fun checkTemplates() = checkAllKnownRegionsInProject(projectPath)
-fun injectTemplates() = injectAllKnownRegionsInProject(projectPath)
+defaultBuildTemplateForRootProject(libs.AbcdK)
 
 // region [Root Build Template]
+
+fun Project.defaultBuildTemplateForRootProject(ossLibDetails: LibDetails? = null) {
+
+    ossLibDetails?.let {
+        defaultGroupAndVerAndDescription(it)
+        defaultSonatypeOssStuffFromSystemEnvs()
+    }
+
+    // kinda workaround for kinda issue with kotlin native
+    // https://youtrack.jetbrains.com/issue/KT-48410/Sync-failed.-Could-not-determine-the-dependencies-of-task-commonizeNativeDistribution.#focus=Comments-27-5144160.0-0
+    repositories { mavenCentral() }
+
+    tasks.registerAllThatGroupFun("inject", ::checkTemplates, ::injectTemplates)
+}
+
+fun checkTemplates() = checkAllKnownRegionsInProject(projectPath)
+fun injectTemplates() = injectAllKnownRegionsInProject(projectPath)
 
 /**
  * System.getenv() should contain six env variables with given prefix, like:
