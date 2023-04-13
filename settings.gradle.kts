@@ -7,7 +7,7 @@ import pl.mareklangiewicz.evts.*
 
 
 pluginManagement {
-//    includeBuild("../deps.kt")
+//    includeBuild("../DepsKt")
     repositories {
 //        mavenLocal()
         google()
