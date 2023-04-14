@@ -11,7 +11,7 @@ plugins {
 }
 
 defaultBuildTemplateForMppLib(
-    details = libs.AbcdK,
+    details = libs.AbcdK.copy(version = v(0, 0, 8)),
     withNativeLinux64 = true,
 )
 
