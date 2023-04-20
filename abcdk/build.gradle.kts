@@ -10,10 +10,7 @@ plugins {
     id("signing")
 }
 
-defaultBuildTemplateForMppLib(
-    details = libs.AbcdK.copy(version = v(0, 0, 8)),
-    withNativeLinux64 = true,
-)
+defaultBuildTemplateForMppLib(withNativeLinux64 = true)
 
 // region [Kotlin Module Build Template]
 
@@ -153,7 +150,7 @@ fun TaskContainer.withSignErrorWorkaround() =
 
 /** Only for very standard small libs. In most cases it's better to not use this function. */
 fun Project.defaultBuildTemplateForMppLib(
-    details: LibDetails = libs.Unknown,
+    details: LibDetails = rootExtLibDetails,
     withJvm: Boolean = true,
     withJs: Boolean = true,
     withNativeLinux64: Boolean = false,

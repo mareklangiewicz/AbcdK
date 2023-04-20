@@ -1,5 +1,6 @@
 import pl.mareklangiewicz.defaults.*
 import pl.mareklangiewicz.deps.LibDetails
+import pl.mareklangiewicz.deps.langaraLibDetails
 import pl.mareklangiewicz.ure.*
 import pl.mareklangiewicz.utils.*
 
@@ -8,13 +9,21 @@ plugins {
     kotlin("multiplatform") version vers.kotlin apply false
 }
 
-defaultBuildTemplateForRootProject(libs.AbcdK)
+defaultBuildTemplateForRootProject(
+    langaraLibDetails(
+        name = "AbcdK",
+        description = "Tiny unions lib for Kotlin.",
+        githubUrl = "https://github.com/langara/AbcdK",
+        version = Ver("0.0.09")
+    )
+)
 
 // region [Root Build Template]
 
 fun Project.defaultBuildTemplateForRootProject(ossLibDetails: LibDetails? = null) {
 
     ossLibDetails?.let {
+        rootExtLibDetails = it
         defaultGroupAndVerAndDescription(it)
         defaultSonatypeOssStuffFromSystemEnvs()
     }

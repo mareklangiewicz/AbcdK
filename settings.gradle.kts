@@ -16,7 +16,7 @@ pluginManagement {
     }
 }
 plugins {
-    id("pl.mareklangiewicz.deps.settings") version "0.2.28"
+    id("pl.mareklangiewicz.deps.settings") version "0.2.32"
 }
 
 rootProject.name = "AbcdK"
