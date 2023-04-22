@@ -1,20 +1,16 @@
 import pl.mareklangiewicz.defaults.*
-import pl.mareklangiewicz.deps.LibDetails
-import pl.mareklangiewicz.deps.langaraLibDetails
+import pl.mareklangiewicz.deps.*
 import pl.mareklangiewicz.ure.*
 import pl.mareklangiewicz.utils.*
 
-plugins {
-    id("io.github.gradle-nexus.publish-plugin") version vers.nexusPublishGradlePlugin
-    kotlin("multiplatform") version vers.kotlin apply false
-}
+plugins { plugDefaultForRoot() }
 
 defaultBuildTemplateForRootProject(
     langaraLibDetails(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/langara/AbcdK",
-        version = Ver("0.0.09")
+        version = Ver(0, 0, 10)
     )
 )
 
