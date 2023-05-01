@@ -178,6 +178,7 @@ fun Project.defaultBuildTemplateForMppLib(
             addCommonMainDependencies
         )
     }
+    configurations.checkVerSync()
     tasks.defaultKotlinCompileOptions()
     tasks.defaultTestsOptions(onJvmUseJUnitPlatform = withTestJUnit5)
     if (plugins.hasPlugin("maven-publish")) {
