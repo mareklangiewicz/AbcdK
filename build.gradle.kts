@@ -11,8 +11,9 @@ defaultBuildTemplateForRootProject(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/langara/AbcdK",
-        version = Ver(0, 0, 13)
-    )
+        version = Ver(0, 0, 14)
+    ),
+    withSonatypeOssPublishing = true,
 )
 
 // region [Root Build Template]
