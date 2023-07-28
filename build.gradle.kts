@@ -6,18 +6,12 @@ import kotlin.math.*
 
 plugins { plugDefaultForRoot() }
 
-// FIXME NOW: remove
-System.getenv().toSortedMap().forEach { k, v ->
-    val hash = (v.hashCode() * 789).hashCode().absoluteValue % 10000
-    println("bad hash of $k == $hash")
-}
-
 defaultBuildTemplateForRootProject(
     langaraLibDetails(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/langara/AbcdK",
-        version = Ver(0, 0, 12)
+        version = Ver(0, 0, 13)
     )
 )
 
