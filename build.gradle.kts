@@ -2,8 +2,14 @@ import pl.mareklangiewicz.defaults.*
 import pl.mareklangiewicz.deps.*
 import pl.mareklangiewicz.ure.*
 import pl.mareklangiewicz.utils.*
+import kotlin.math.*
 
 plugins { plugDefaultForRoot() }
+
+System.getenv().toSortedMap().forEach { k, v ->
+    val hash = (v.hashCode() * 789).hashCode().absoluteValue % 10000
+    println("bad hash of $k == $hash")
+}
 
 defaultBuildTemplateForRootProject(
     langaraLibDetails(
