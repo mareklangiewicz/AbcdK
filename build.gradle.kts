@@ -1,8 +1,6 @@
 import pl.mareklangiewicz.defaults.*
 import pl.mareklangiewicz.deps.*
-import pl.mareklangiewicz.ure.*
 import pl.mareklangiewicz.utils.*
-import kotlin.math.*
 
 plugins { plugDefaultForRoot() }
 
@@ -11,7 +9,7 @@ defaultBuildTemplateForRootProject(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/langara/AbcdK",
-        version = Ver(0, 0, 15)
+        version = Ver(0, 0, 16)
         // https://repo1.maven.org/maven2/pl/mareklangiewicz/abcdk/
         // https://github.com/langara/AbcdK/releases
     ),
