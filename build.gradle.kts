@@ -9,7 +9,7 @@ defaultBuildTemplateForRootProject(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/langara/AbcdK",
-        version = Ver(0, 0, 16)
+        version = Ver(0, 0, 17)
         // https://repo1.maven.org/maven2/pl/mareklangiewicz/abcdk/
         // https://github.com/langara/AbcdK/releases
     ),
