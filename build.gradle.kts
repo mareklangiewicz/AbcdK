@@ -4,31 +4,37 @@ import pl.mareklangiewicz.utils.*
 
 plugins { plugDefaultForRoot() }
 
+val enableJs = true
+val enableNative = true
+
 defaultBuildTemplateForRootProject(
     langaraLibDetails(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
-        githubUrl = "https://github.com/langara/AbcdK",
-        version = Ver(0, 0, 17)
-        // https://repo1.maven.org/maven2/pl/mareklangiewicz/abcdk/
-        // https://github.com/langara/AbcdK/releases
+        githubUrl = "https://github.com/mareklangiewicz/AbcdK",
+        version = Ver(0, 0, 18),
+        // https://s01.oss.sonatype.org/content/repositories/releases/pl/mareklangiewicz/abcdk/
+        // https://github.com/mareklangiewicz/AbcdK/releases
+        settings = LibSettings(
+            withJs = enableJs,
+            withNativeLinux64 = enableNative,
+            withKotlinxHtml = false,
+            compose = null,
+            andro = null,
+            withSonatypeOssPublishing = true,
+        ),
     ),
-    withSonatypeOssPublishing = true,
 )
 
 // region [Root Build Template]
 
 /** Publishing to Sonatype OSSRH has to be explicitly allowed here, by setting withSonatypeOssPublishing to true. */
-fun Project.defaultBuildTemplateForRootProject(
-    libDetails: LibDetails? = null,
-    withSonatypeOssPublishing: Boolean = false
-) {
-    check(libDetails != null || !withSonatypeOssPublishing)
+fun Project.defaultBuildTemplateForRootProject(details: LibDetails? = null) {
     ext.addDefaultStuffFromSystemEnvs()
-    libDetails?.let {
+    details?.let {
         rootExtLibDetails = it
         defaultGroupAndVerAndDescription(it)
-        if (withSonatypeOssPublishing) defaultSonatypeOssNexusPublishing()
+        if (it.settings.withSonatypeOssPublishing) defaultSonatypeOssNexusPublishing()
     }
 
     // kinda workaround for kinda issue with kotlin native
