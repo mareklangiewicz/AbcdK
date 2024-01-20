@@ -18,9 +18,7 @@ defaultBuildTemplateForRootProject(
         settings = LibSettings(
             withJs = enableJs,
             withNativeLinux64 = enableNative,
-            withKotlinxHtml = false,
             compose = null,
-            andro = null,
             withSonatypeOssPublishing = true,
         ),
     ),
