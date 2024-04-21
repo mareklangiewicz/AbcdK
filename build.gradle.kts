@@ -8,7 +8,7 @@ val enableJs = true
 val enableNative = true
 
 defaultBuildTemplateForRootProject(
-    langaraLibDetails(
+    myLibDetails(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/mareklangiewicz/AbcdK",
@@ -28,16 +28,16 @@ defaultBuildTemplateForRootProject(
 
 /** Publishing to Sonatype OSSRH has to be explicitly allowed here, by setting withSonatypeOssPublishing to true. */
 fun Project.defaultBuildTemplateForRootProject(details: LibDetails? = null) {
-    ext.addDefaultStuffFromSystemEnvs()
-    details?.let {
-        rootExtLibDetails = it
-        defaultGroupAndVerAndDescription(it)
-        if (it.settings.withSonatypeOssPublishing) defaultSonatypeOssNexusPublishing()
-    }
+  ext.addDefaultStuffFromSystemEnvs()
+  details?.let {
+    rootExtLibDetails = it
+    defaultGroupAndVerAndDescription(it)
+    if (it.settings.withSonatypeOssPublishing) defaultSonatypeOssNexusPublishing()
+  }
 
-    // kinda workaround for kinda issue with kotlin native
-    // https://youtrack.jetbrains.com/issue/KT-48410/Sync-failed.-Could-not-determine-the-dependencies-of-task-commonizeNativeDistribution.#focus=Comments-27-5144160.0-0
-    repositories { mavenCentral() }
+  // kinda workaround for kinda issue with kotlin native
+  // https://youtrack.jetbrains.com/issue/KT-48410/Sync-failed.-Could-not-determine-the-dependencies-of-task-commonizeNativeDistribution.#focus=Comments-27-5144160.0-0
+  repositories { mavenCentral() }
 }
 
 /**
@@ -52,24 +52,24 @@ fun Project.defaultBuildTemplateForRootProject(details: LibDetails? = null) {
  * * See DepsKt/template-mpp/template-mpp-lib/build.gradle.kts
  */
 fun ExtraPropertiesExtension.addDefaultStuffFromSystemEnvs(envKeyMatchPrefix: String = "MYKOTLIBS_") =
-    addAllFromSystemEnvs(envKeyMatchPrefix)
+  addAllFromSystemEnvs(envKeyMatchPrefix)
 
 fun Project.defaultSonatypeOssNexusPublishing(
-    sonatypeStagingProfileId: String = rootExtString["sonatypeStagingProfileId"],
-    ossrhUsername: String = rootExtString["ossrhUsername"],
-    ossrhPassword: String = rootExtString["ossrhPassword"],
+  sonatypeStagingProfileId: String = rootExtString["sonatypeStagingProfileId"],
+  ossrhUsername: String = rootExtString["ossrhUsername"],
+  ossrhPassword: String = rootExtString["ossrhPassword"],
 ) {
-    nexusPublishing {
-        this.repositories {
-            sonatype {  // only for users registered in Sonatype after 24 Feb 2021
-                stagingProfileId put sonatypeStagingProfileId
-                username put ossrhUsername
-                password put ossrhPassword
-                nexusUrl put repos.sonatypeOssNexus
-                snapshotRepositoryUrl put repos.sonatypeOssSnapshots
-            }
-        }
+  nexusPublishing {
+    this.repositories {
+      sonatype {  // only for users registered in Sonatype after 24 Feb 2021
+        stagingProfileId put sonatypeStagingProfileId
+        username put ossrhUsername
+        password put ossrhPassword
+        nexusUrl put repos.sonatypeOssNexus
+        snapshotRepositoryUrl put repos.sonatypeOssSnapshots
+      }
     }
+  }
 }
 
 // endregion [Root Build Template]
