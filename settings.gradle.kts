@@ -9,10 +9,10 @@ val buildScanPublishingAllowed =
   // false
 
 
-// region [My Settings Stuff <~~]
+// region [[My Settings Stuff <~~]]
 // ~~>".*/Deps\.kt"~~>"../DepsKt"<~~
-// endregion [My Settings Stuff <~~]
-// region [My Settings Stuff]
+// endregion [[My Settings Stuff <~~]]
+// region [[My Settings Stuff]]
 
 pluginManagement {
   repositories {
@@ -44,6 +44,6 @@ develocity {
   }
 }
 
-// endregion [My Settings Stuff]
+// endregion [[My Settings Stuff]]
 
 include(":abcdk")

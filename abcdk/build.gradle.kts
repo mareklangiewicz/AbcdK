@@ -8,7 +8,7 @@ plugins { plugDefaultForMppModule() }
 
 defaultBuildTemplateForBasicMppLib()
 
-// region [Kotlin Module Build Template]
+// region [[Kotlin Module Build Template]]
 
 // Kind of experimental/temporary.. not sure how it will evolve yet,
 // but currently I need these kind of substitutions/locals often enough
@@ -193,9 +193,9 @@ fun TaskContainer.withPublishingPrintln() = withType<AbstractPublishToMaven>().c
   }
 }
 
-// endregion [Kotlin Module Build Template]
+// endregion [[Kotlin Module Build Template]]
 
-// region [MPP Module Build Template]
+// region [[MPP Module Build Template]]
 
 /**
  * Only for very standard small libs. In most cases it's better to not use this function.
@@ -323,4 +323,4 @@ fun KotlinMultiplatformExtension.jsDefault(
   }
 }
 
-// endregion [MPP Module Build Template]
+// endregion [[MPP Module Build Template]]
