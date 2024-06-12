@@ -227,7 +227,7 @@ fun Project.defaultBuildTemplateForBasicMppLib(
     )
   }
   configurations.checkVerSync()
-  tasks.defaultKotlinCompileOptions(details.settings.withJvmVer)
+  tasks.defaultKotlinCompileOptions(jvmTargetVer = null) // jvmVer is set below with jvmToolchain
   tasks.defaultTestsOptions(onJvmUseJUnitPlatform = details.settings.withTestJUnit5)
   if (plugins.hasPlugin("maven-publish")) {
     defaultPublishing(details)
