@@ -6,15 +6,15 @@ plugins { plugDefaultForRoot() }
 
 // New issue with js and native (unresolved references in common code)
 // TODO: try again after deps update
-val enableJs = true
-val enableNative = true
+val enableJs = false
+val enableNative = false
 
 defaultBuildTemplateForRootProject(
     myLibDetails(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/mareklangiewicz/AbcdK",
-        version = Ver(0, 0, 19),
+        version = Ver(0, 0, 20),
         // https://s01.oss.sonatype.org/content/repositories/releases/pl/mareklangiewicz/abcdk/
         // https://github.com/mareklangiewicz/AbcdK/releases
         settings = LibSettings(
