@@ -7,7 +7,7 @@ plugins { plugDefaultForRoot() }
 // New issue with js and native (unresolved references in common code)
 // TODO: try again after deps update
 val enableJs = true
-val enableNative = false
+val enableNative = true
 
 defaultBuildTemplateForRootProject(
     myLibDetails(
