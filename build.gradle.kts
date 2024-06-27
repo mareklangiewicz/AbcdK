@@ -1,8 +1,16 @@
-import pl.mareklangiewicz.defaults.*
-import pl.mareklangiewicz.deps.*
-import pl.mareklangiewicz.utils.*
 
-plugins { plugDefaultForRoot() }
+// region [[Basic Root Build Imports and Plugs]]
+
+import pl.mareklangiewicz.defaults.*
+import pl.mareklangiewicz.utils.*
+import pl.mareklangiewicz.deps.*
+
+plugins {
+  plug(plugs.KotlinMulti) apply false
+  plug(plugs.NexusPublish)
+}
+
+// endregion [[Basic Root Build Imports and Plugs]]
 
 // New issue with js and native (unresolved references in common code)
 // TODO: try again after deps update
