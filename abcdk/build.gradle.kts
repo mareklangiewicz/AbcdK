@@ -17,6 +17,8 @@ plugins {
 
 // endregion [[Basic MPP Lib Build Imports and Plugs]]
 
+defaultBuildTemplateForBasicMppLib()
+
 // region [[Kotlin Module Build Template]]
 
 // Kind of experimental/temporary.. not sure how it will evolve yet,
