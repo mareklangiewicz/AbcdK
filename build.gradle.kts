@@ -7,6 +7,7 @@ import pl.mareklangiewicz.deps.*
 
 plugins {
   plug(plugs.KotlinMulti) apply false
+  plug(plugs.KotlinJvm) apply false
   plug(plugs.NexusPublish)
 }
 
