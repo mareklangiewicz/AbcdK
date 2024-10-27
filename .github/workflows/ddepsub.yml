@@ -12,6 +12,8 @@ on:
 jobs:
   dependency-submission-on-UbuntuLatest:
     runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'write'
     env:
       MYKOTLIBS_signing_keyId: '${{ secrets.MYKOTLIBS_signing_keyId }}'
       MYKOTLIBS_signing_password: '${{ secrets.MYKOTLIBS_signing_password }}'
