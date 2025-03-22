@@ -31,5 +31,5 @@ jobs:
       name: 'build'
       run: './gradlew build --no-configuration-cache --no-parallel'
     - id: 'step-4'
-      name: 'publishToMavenCentral'
+      name: 'publishAndReleaseToMavenCentral'
       run: './gradlew publishToMavenCentral --no-configuration-cache --no-parallel'
