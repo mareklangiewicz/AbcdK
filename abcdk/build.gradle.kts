@@ -2,6 +2,8 @@
 // region [[Basic MPP Lib Build Imports and Plugs]]
 
 import com.vanniktech.maven.publish.*
+import okio.Path.Companion.toPath
+import okio.FileSystem.Companion.SYSTEM
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
 import pl.mareklangiewicz.defaults.*
@@ -106,20 +108,28 @@ fun MavenPom.defaultPOM(lib: LibDetails) {
   scm { url put lib.githubUrl }
 }
 
-/** See also: root project template-full: addDefaultStuffFromSystemEnvs */
-fun Project.defaultSigning(
-  keyId: String = rootExtString["signing.keyId"],
-  key: String = rootExtReadFileUtf8TryOrNull("signing.keyFile") ?: rootExtString["signing.key"],
-  password: String = rootExtString["signing.password"],
-) = extensions.configure<SigningExtension> {
-  useInMemoryPgpKeys(keyId, key, password)
-  sign(extensions.getByType<PublishingExtension>().publications)
+
+
+// FIXME TEMPORARY (will be in DepsKt:Utils.kt)
+
+fun Project.extSetFromLazyFile(prop: String, suffix: String = "_LAZY_FILE") {
+  val file = findProperty("$prop$suffix")?.toString() ?: error("Missing $prop$suffix property.")
+  extString[prop] = readFileUtf8(file)
 }
+
+fun readFileUtf8(fileName: String): String = SYSTEM.read(fileName.toPath()) { readUtf8() }
+
+// END TEMPORARY
+
+
+
+
 
 fun Project.defaultPublishing(lib: LibDetails) {
   extensions.configure<MavenPublishBaseExtension> {
     if (lib.settings.withSonatypeOssPublishing)
       publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    extSetFromLazyFile("signingInMemoryKey")
     signAllPublications()
     // Note: artifactId is not lib.name but current project.name (module name)
     coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
