@@ -31,5 +31,5 @@ jobs:
       name: 'build'
       run: './gradlew build --no-configuration-cache --no-parallel'
     - id: 'step-4'
-      name: 'publishToSonatype closeAndReleaseSonatypeStagingRepository'
-      run: './gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository --no-configuration-cache --no-parallel'
+      name: 'publishToMavenCentral'
+      run: './gradlew publishToMavenCentral --no-configuration-cache --no-parallel'
