@@ -110,7 +110,8 @@ fun Project.defaultPublishing(lib: LibDetails) {
   extensions.configure<MavenPublishBaseExtension> {
     if (lib.settings.withSonatypeOssPublishing)
       publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
-    extSetFromLazyFile("signingInMemoryKey")
+    if (findProperty("signingInMemoryKey") == null)
+      extSetFromLazyFile("signingInMemoryKey")
     signAllPublications()
     // Note: artifactId is not lib.name but current project.name (module name)
     coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
