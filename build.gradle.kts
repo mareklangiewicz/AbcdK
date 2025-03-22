@@ -20,7 +20,7 @@ defaultBuildTemplateForRootProject(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/mareklangiewicz/AbcdK",
-        version = Ver(0, 0, 30),
+        version = Ver(0, 0, 31),
         // https://central.sonatype.com/artifact/pl.mareklangiewicz/abcdk
         // https://github.com/mareklangiewicz/AbcdK/releases
         settings = LibSettings(
@@ -39,10 +39,6 @@ fun Project.defaultBuildTemplateForRootProject(details: LibDetails? = null) {
     rootExtLibDetails = it
     defaultGroupAndVerAndDescription(it)
   }
-
-  // kinda workaround for kinda issue with kotlin native
-  // https://youtrack.jetbrains.com/issue/KT-48410/Sync-failed.-Could-not-determine-the-dependencies-of-task-commonizeNativeDistribution.#focus=Comments-27-5144160.0-0
-  repositories { mavenCentral() }
 }
 
 // endregion [[Root Build Template]]
