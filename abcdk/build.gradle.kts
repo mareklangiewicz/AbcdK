@@ -118,19 +118,9 @@ fun Project.defaultPublishing(lib: LibDetails) {
     val key = findProperty(prop)?.toString()
     when {
       key == null -> extSetFromLazyFile(prop)
-      !key.endsWith('\n') -> extString[prop] = key + '\n' // workaround for sometimes eating last \n in gradle or github actions processing
+      !key.endsWith('\n') -> extString[prop] = key + '\n'
+        // workaround for sometimes eating last \n on CI in gradle or github actions processing
     }
-
-    // FIXME: experimental
-    val mk1 = findProperty("signingInMemoryKey")?.toString()
-    val mk2 = findProperty("signingInMemoryKeyTest")?.toString()
-    println("mk1: ${mk1?.report}")
-    println("mk2: ${mk2?.report}")
-    check(mk1 == mk2)
-
-
-
-
     signAllPublications()
     // Note: artifactId is not lib.name but current project.name (module name)
     coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
