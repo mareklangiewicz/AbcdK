@@ -109,9 +109,20 @@ fun MavenPom.defaultPOM(lib: LibDetails) {
 fun Project.defaultPublishing(lib: LibDetails) {
   extensions.configure<MavenPublishBaseExtension> {
     if (lib.settings.withSonatypeOssPublishing)
-      publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+      publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = false)
     if (findProperty("signingInMemoryKey") == null)
       extSetFromLazyFile("signingInMemoryKey")
+
+    // FIXME: experimental
+    val mk1 = findProperty("signingInMemoryKey")?.toString()
+    val mk2 = findProperty("signingInMemoryKeyTest")?.toString()
+    println("mk1: length:${mk1?.length}, hash:${mk1?.hashCode()}")
+    println("mk2: length:${mk2?.length}, hash:${mk2?.hashCode()}")
+    check(mk1 == mk2)
+
+
+
+
     signAllPublications()
     // Note: artifactId is not lib.name but current project.name (module name)
     coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
