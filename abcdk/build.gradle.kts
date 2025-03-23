@@ -106,9 +106,10 @@ fun MavenPom.defaultPOM(lib: LibDetails) {
   scm { url put lib.githubUrl }
 }
 
-val String.scut get() = substring(0..7) + ".." + substring(length-8..length-1)
+val String.scut get() = substring(0..2) + ".." + substring(length-3..length-1)
 val String.codes get() = map { "<${it.code}>" }.joinToString("")
 val String.report get() = "length:$length, hash:${hashCode()}, scut:$scut, scut.codes: ${scut.codes}"
+fun propPrintReport(name: String) = println(name + ": " + findProperty(name)?.toString()?.report)
 
 fun Project.defaultPublishing(lib: LibDetails) {
   extensions.configure<MavenPublishBaseExtension> {
@@ -121,6 +122,16 @@ fun Project.defaultPublishing(lib: LibDetails) {
       !key.endsWith('\n') -> extString[prop] = key + '\n'
         // workaround for sometimes eating last \n on CI in gradle or github actions processing
     }
+
+
+    // FIXME: experiment:
+    propPrintReport("signingInMemoryKey")
+    propPrintReport("signingInMemoryKeyId")
+    propPrintReport("signingInMemoryKeyPassword")
+    propPrintReport("mavenCentralUsername")
+    propPrintReport("mavenCentralPassword")
+
+
     signAllPublications()
     // Note: artifactId is not lib.name but current project.name (module name)
     coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
