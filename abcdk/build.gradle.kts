@@ -106,7 +106,7 @@ fun MavenPom.defaultPOM(lib: LibDetails) {
   scm { url put lib.githubUrl }
 }
 
-val String.scut get() = substring(0..7) + "..." + substring(length-9, length-1)
+val String.scut get() = substring(0..7) + ".." + substring(length-9..length-1)
 val String.report get() = "length:$length, hash:${hashCode()}, scut:$scut"
 
 fun Project.defaultPublishing(lib: LibDetails) {
