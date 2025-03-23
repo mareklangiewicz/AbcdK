@@ -114,8 +114,12 @@ fun Project.defaultPublishing(lib: LibDetails) {
   extensions.configure<MavenPublishBaseExtension> {
     if (lib.settings.withSonatypeOssPublishing)
       publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = false)
-    if (findProperty("signingInMemoryKey") == null)
-      extSetFromLazyFile("signingInMemoryKey")
+    val prop = "signingInMemoryKey"
+    val key = findProperty(prop)?.toString()
+    when {
+      key == null -> extSetFromLazyFile(prop)
+      !key.endsWith('\n') -> extString[prop] = key + '\n' // workaround for sometimes eating last \n in gradle or github actions processing
+    }
 
     // FIXME: experimental
     val mk1 = findProperty("signingInMemoryKey")?.toString()
