@@ -106,6 +106,9 @@ fun MavenPom.defaultPOM(lib: LibDetails) {
   scm { url put lib.githubUrl }
 }
 
+val String.scut get() = substring(0..7) + "..." + substring(length-9, length-1)
+val String.report get() = "length:$length, hash:${hashCode()}, scut:$scut"
+
 fun Project.defaultPublishing(lib: LibDetails) {
   extensions.configure<MavenPublishBaseExtension> {
     if (lib.settings.withSonatypeOssPublishing)
@@ -116,8 +119,8 @@ fun Project.defaultPublishing(lib: LibDetails) {
     // FIXME: experimental
     val mk1 = findProperty("signingInMemoryKey")?.toString()
     val mk2 = findProperty("signingInMemoryKeyTest")?.toString()
-    println("mk1: length:${mk1?.length}, hash:${mk1?.hashCode()}")
-    println("mk2: length:${mk2?.length}, hash:${mk2?.hashCode()}")
+    println("mk1: ${mk1?.report}")
+    println("mk2: ${mk2?.report}")
     check(mk1 == mk2)
 
 
