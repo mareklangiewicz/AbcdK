@@ -20,7 +20,7 @@ defaultBuildTemplateForRootProject(
         name = "AbcdK",
         description = "Tiny unions lib for Kotlin.",
         githubUrl = "https://github.com/mareklangiewicz/AbcdK",
-        version = Ver(0, 0, 32),
+        version = Ver(0, 0, 33),
         // https://central.sonatype.com/artifact/pl.mareklangiewicz/abcdk
         // https://github.com/mareklangiewicz/AbcdK/releases
         settings = LibSettings(
