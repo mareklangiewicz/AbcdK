@@ -106,17 +106,14 @@ fun MavenPom.defaultPOM(lib: LibDetails) {
   scm { url put lib.githubUrl }
 }
 
-fun Project.defaultPublishing(lib: LibDetails) {
-  extensions.configure<MavenPublishBaseExtension> {
-    if (lib.settings.withSonatypeOssPublishing)
-      publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = false)
-    val p = "signingInMemoryKey"
-    if (findProperty(p)?.toString() == null) extSetFromLazyFile(p)
-    signAllPublications()
-    // Note: artifactId is not lib.name but current project.name (module name)
-    coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
-    pom { defaultPOM(lib) }
-  }
+fun Project.defaultPublishing(lib: LibDetails) = extensions.configure<MavenPublishBaseExtension> {
+  propertiesTryOverride("signingInMemoryKey", "signingInMemoryKeyPassword", "mavenCentralPassword")
+  if (lib.settings.withSonatypeOssPublishing)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = false)
+  signAllPublications()
+  // Note: artifactId is not lib.name but current project.name (module name)
+  coordinates(groupId = lib.group, artifactId = name, version = lib.version.str)
+  pom { defaultPOM(lib) }
 }
 
 // endregion [[Kotlin Module Build Template]]
