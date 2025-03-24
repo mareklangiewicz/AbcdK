@@ -1,9 +1,9 @@
 
 // region [[Basic MPP Lib Build Imports and Plugs]]
 
-import com.vanniktech.maven.publish.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
+import com.vanniktech.maven.publish.*
 import pl.mareklangiewicz.defaults.*
 import pl.mareklangiewicz.deps.*
 import pl.mareklangiewicz.utils.*
@@ -153,9 +153,8 @@ fun Project.defaultBuildTemplateForBasicMppLib(
   configurations.checkVerSync(warnOnly = true)
   tasks.defaultKotlinCompileOptions(jvmTargetVer = null) // jvmVer is set in fun allDefault using jvmToolchain
   tasks.defaultTestsOptions(onJvmUseJUnitPlatform = details.settings.withTestJUnit5)
-  if (plugins.hasPlugin("com.vanniktech.maven.publish")) {
-    defaultPublishing(details)
-  } else println("MPP Module ${name}: publishing (and signing) disabled")
+  if (plugins.hasPlugin("com.vanniktech.maven.publish")) defaultPublishing(details)
+  else println("MPP Module ${name}: publishing (and signing) disabled")
 }
 
 /**
