@@ -204,7 +204,10 @@ fun KotlinMultiplatformExtension.allDefault(
       val jvmTest by getting {
         dependencies {
           if (withTestJUnit4) implementation(JUnit.junit)
-          if (withTestJUnit5) implementation(Org.JUnit.Jupiter.junit_jupiter_engine)
+          if (withTestJUnit5) {
+            implementation(Org.JUnit.Jupiter.junit_jupiter_engine)
+            runtimeOnly(Org.JUnit.Platform.junit_platform_launcher)
+          }
           if (withTestUSpekX) {
             implementation(Langiewicz.uspekx)
             if (withTestJUnit4) implementation(Langiewicz.uspekx_junit4)
