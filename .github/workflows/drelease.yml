@@ -7,12 +7,6 @@ on:
   push:
     tags:
     - 'v*.*.*'
-env:
-  ORG_GRADLE_PROJECT_signingInMemoryKey: '${{ secrets.KL_SIGNINGINMEMORYKEY }}'
-  ORG_GRADLE_PROJECT_signingInMemoryKeyId: '${{ secrets.KL_SIGNINGINMEMORYKEYID }}'
-  ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: '${{ secrets.KL_SIGNINGINMEMORYKEYPASSWORD }}'
-  ORG_GRADLE_PROJECT_mavenCentralUsername: '${{ secrets.KL_MAVENCENTRALUSERNAME }}'
-  ORG_GRADLE_PROJECT_mavenCentralPassword: '${{ secrets.KL_MAVENCENTRALPASSWORD }}'
 jobs:
   release:
     runs-on: 'ubuntu-latest'
@@ -31,5 +25,11 @@ jobs:
       name: 'build'
       run: './gradlew build --no-configuration-cache --no-parallel'
     - id: 'step-4'
+      env:
+        ORG_GRADLE_PROJECT_signingInMemoryKey: '${{ secrets.KL_SIGNINGINMEMORYKEY }}'
+        ORG_GRADLE_PROJECT_signingInMemoryKeyId: '${{ secrets.KL_SIGNINGINMEMORYKEYID }}'
+        ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: '${{ secrets.KL_SIGNINGINMEMORYKEYPASSWORD }}'
+        ORG_GRADLE_PROJECT_mavenCentralUsername: '${{ secrets.KL_MAVENCENTRALUSERNAME }}'
+        ORG_GRADLE_PROJECT_mavenCentralPassword: '${{ secrets.KL_MAVENCENTRALPASSWORD }}'
       name: 'publishAndReleaseToMavenCentral'
       run: './gradlew publishAndReleaseToMavenCentral --no-configuration-cache --no-parallel'
