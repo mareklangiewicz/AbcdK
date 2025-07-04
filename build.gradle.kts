@@ -27,7 +27,7 @@ defaultBuildTemplateForRootProject(
             withJs = enableJs,
             withNativeLinux64 = enableNative,
             compose = null,
-            withSonatypeOssPublishing = true,
+            withCentralPublish = true,
         ),
     ),
 )
