@@ -25,7 +25,7 @@ defaultBuildTemplateForRootProject(
         // https://github.com/mareklangiewicz/AbcdK/releases
         settings = LibSettings(
             withJs = enableJs,
-            withNativeLinux64 = enableNative,
+            withLinuxX64 = enableNative,
             compose = null,
             withCentralPublish = true,
         ),
