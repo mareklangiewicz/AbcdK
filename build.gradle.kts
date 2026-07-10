@@ -1,9 +1,8 @@
-
 // region [[Basic Root Build Imports and Plugs]]
 
 import pl.mareklangiewicz.defaults.*
-import pl.mareklangiewicz.utils.*
 import pl.mareklangiewicz.deps.*
+import pl.mareklangiewicz.utils.*
 
 plugins {
   plug(plugs.KotlinMulti) apply false
@@ -16,20 +15,20 @@ val enableJs = true
 val enableNative = true
 
 defaultBuildTemplateForRootProject(
-    myLibDetails(
-        name = "AbcdK",
-        description = "Tiny unions lib for Kotlin.",
-        githubUrl = "https://github.com/mareklangiewicz/AbcdK",
-        version = Ver(0, 0, 40),
-        // https://central.sonatype.com/artifact/pl.mareklangiewicz/abcdk
-        // https://github.com/mareklangiewicz/AbcdK/releases
-        settings = LibSettings(
-            withJs = enableJs,
-            withLinuxX64 = enableNative,
-            compose = null,
-            withCentralPublish = true,
-        ),
+  myLibDetails(
+    name = "AbcdK",
+    description = "Tiny unions lib for Kotlin.",
+    githubUrl = "https://github.com/mareklangiewicz/AbcdK",
+    version = Ver(0, 0, 40),
+    // https://central.sonatype.com/artifact/pl.mareklangiewicz/abcdk
+    // https://github.com/mareklangiewicz/AbcdK/releases
+    settings = LibSettings(
+      withJs = enableJs,
+      withLinuxX64 = enableNative,
+      compose = null,
+      withCentralPublish = true,
     ),
+  ),
 )
 
 // region [[Root Build Template]]
