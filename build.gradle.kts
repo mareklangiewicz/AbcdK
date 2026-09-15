@@ -6,7 +6,7 @@ import pl.mareklangiewicz.utils.*
 import pl.mareklangiewicz.templatefun.*
 
 plugins {
-  id("pl.mareklangiewicz.templatefun") version "0.4.28" apply false // https://plugins.gradle.org/search?term=mareklangiewicz
+  plug(plugs.TemplateFun) apply false
   plug(plugs.KotlinMulti) apply false
   plug(plugs.KotlinJvm) apply false
 
